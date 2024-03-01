@@ -4,6 +4,9 @@ build:
 run:build
 	@./bin/backend-wallet
 
+test:
+	@go test -v -cover ./...
+
 start-hardhat:
 	docker build . -t local-hardhat
 	docker start hardhat-node || docker run --name hardhat-node -d -p 8545:8545 local-hardhat

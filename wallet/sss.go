@@ -13,6 +13,32 @@ func GenerateSharedSecret(wallet Wallet) ([]string, error) {
 		return nil, err
 	}
 
+	return shareSecret(privateKey)
+}
+
+func GenerateSharedSecretBytes(privateKey []byte) ([]string, error) {
+	return shareSecret(privateKey)
+}
+
+func CombineThresholdShares(strShares []string) ([]byte, error) {
+	byteShares := [][]byte{}
+	for _, strShare := range strShares {
+		if strShare == "" {
+			continue
+		}
+
+		byteShare, err := hex.DecodeString(strShare)
+		if err != nil {
+			return nil, err
+		}
+
+		byteShares = append(byteShares, byteShare)
+	}
+
+	return shamir.Combine(byteShares)
+}
+
+func shareSecret(privateKey []byte) ([]string, error) {
 	byteShares, err := shamir.Split(privateKey, 3, 2)
 	if err != nil {
 		return nil, err

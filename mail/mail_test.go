@@ -30,7 +30,7 @@ func TestSendMail(t *testing.T) {
 	config, err := config.LoadConfig()
 	require.NoError(t, err)
 
-	to := "jongm.yu@gmail.com"
+	to := "aaa@aaa.com"
 
 	p := issuePassCode(t, config, to)
 

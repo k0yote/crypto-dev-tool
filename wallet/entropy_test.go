@@ -1,7 +1,6 @@
 package wallet
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/k0yote/backend-wallet/config"
@@ -15,6 +14,5 @@ func TestEntropy(t *testing.T) {
 
 	b, err := entropy(config, 32)
 	require.NoError(t, err)
-
-	fmt.Printf("Entropy: %v\n", b)
+	require.NotEmpty(t, b)
 }

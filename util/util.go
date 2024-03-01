@@ -4,6 +4,8 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+
+	"github.com/ethereum/go-ethereum/crypto"
 )
 
 func GetRootPath() (string, error) {
@@ -30,4 +32,13 @@ func GetRootPath() (string, error) {
 	}
 
 	return currentDir, nil
+}
+
+func RandomPrivateKey() ([]byte, error) {
+	privateKey, err := crypto.GenerateKey()
+	if err != nil {
+		return nil, err
+	}
+
+	return crypto.FromECDSA(privateKey), nil
 }
